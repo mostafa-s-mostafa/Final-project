@@ -1,0 +1,190 @@
+encounter_id, patient_nbr: Unique identifiers.
+admission_type_id, discharge_disposition_id, admission_source_id
+
+time_in_hospital – Represents the number of days a patient stayed
+number_outpatient – Number of outpatient visits
+number_emergency – Number of emergency visits
+umber_inpatient – Number of inpatient visits
+number_diagnoses – Count of diagnoses made
+
+race, gender, age: Patient
+weight: Patient weight 
+
+num_lab_procedures: Total lab tests performed
+num_procedures: Number of procedures performed.
+num_medications: Number of medications prescribed
+
+diag_1, diag_2, diag_3: Primary and secondary diagnosis codes.
+number_diagnoses: Total number of diagnoses.
+
+metformin, insulin etc medication col with data (No, Steady, Up, Down).
+
+change: Whether medications were changed (Yes or No).
+diabetesMed: If the patient was on diabetes medication.
+readmitted: Whether the patient was (return to hospital or not)  readmitted the data : (NO, <30, >30 days).
+
+
+
+Numeric columns with categorical/ordinal meaning:
+
+time_in_hospital
+
+number_outpatient
+
+number_inpatient
+
+number_diagnoses
+
+number_emergency
+
+
+
+Numeric columns to handle with log transformation:
+
+num_lab_procedures
+
+num_medications
+
+
+
+
+
+Cluster 0:
+Average age_midpoint: 65 years (older adults).
+Frequent diagnoses in the Circulatory System (390-459), suggesting cardiovascular issues.
+
+
+Cluster 1:
+Average age_midpoint: 35 years (younger adults).
+Diagnosis centered around Pregnancy (630-679) and Endocrine/Metabolic Disorders (240-279).
+
+
+Cluster 2:
+Average age_midpoint: 75 years (older population).
+Dominant diagnoses: Injury/Poisoning (800-999) and Circulatory System (390-459).
+
+
+Cluster 3:
+Average age_midpoint: 65 years (similar to Cluster 0).
+Diagnoses are primarily Circulatory System (390-459) 
+
+
+Silhouette Score (higher is better): 0.40
+Davies-Bouldin Score (lower is better): 0.54
+Calinski-Harabasz Score (higher is better): 137192.34
+
+
+
+
+model
+simple_model:
+log_reg vald 42, vald after extract new feature 60, 
+nb: vald/0.51
+linersvc: vald/0.6086
+svm liner: 
+knn: vald:0.78 k=3, 0.8005 underfit
+poly_svm:83train/ 80vald
+
+sgd:0.5975
+
+complex model:
+
+svm:
+
+
+dt:
+Train Accuracy: 0.8052474304058618
+Validation Accuracy: 0.80554463997656
+
+
+svm rbf:
+
+
+bagging:
+
+rf:
+Train Accuracy: 0.884125412846583
+Validation Accuracy: 0.8806376372219228
+
+Precision Score: 0.999956766104626
+Recall Score: 0.6419372744934777
+F1 Score: 0.7819134550371873
+
+rf5:
+Train Accuracy: 0.9145442266238633
+Validation Accuracy: 0.9089471180626928
+
+Precision Score: 0.999161329673681
+Recall Score: 0.7274493477657508
+F1 Score: 0.8419260544152132
+
+et:Train Accuracy: 0.6716562896078304
+Validation Accuracy: 0.6719523342908446
+
+
+
+gb:
+Train Accuracy: 0.9089563423411755
+Validation Accuracy: 0.9092524192006334
+Precision Score: 0.9980246913580247
+Recall Score: 0.7291978906466833
+F1 Score: 0.842691043220271
+
+gb3:
+Train Accuracy: 0.9082254766816849
+Validation Accuracy: 0.9073188530298586
+
+Precision Score: 0.9968673594132029
+Recall Score: 0.7242298084929225
+F1 Score: 0.8389544416937273
+
+ada:
+Train Accuracy: 0.9032995511129622
+Validation Accuracy: 0.9039751955203851
+
+Precision Score: 0.9978649897131322
+Recall Score: 0.7134610047182903
+F1 Score: 0.832030554611513
+
+xgb:
+Train Accuracy: 0.9149605425058516
+Validation Accuracy: 0.9139244089724823
+
+Precision Score: 0.997431506849315
+Recall Score: 0.7436858173744102
+F1 Score: 0.852068559799027
+
+lgb:
+Train Accuracy: 0.9268915729557129
+Validation Accuracy: 0.9164607339534454
+
+Precision Score: 0.9923555749699683
+Recall Score: 0.7566194837635304
+F1 Score: 0.8586006519582369
+
+
+voting:
+Train Accuracy: 0.9181
+Validation Accuracy: 0.8551
+
+Precision Score: 0.998775918988093
+Recall Score: 0.7476329307233097
+F1 Score: 0.8551465684250643
+
+stacking log:
+Train Accuracy: 0.9438
+Validation Accuracy: 0.8596
+
+Precision Score: 0.9791319161017852
+Recall Score: 0.7660419269748716
+F1 Score: 0.859577517447657
+
+
+stacking lgb:
+Train Accuracy: 0.9445
+Validation Accuracy: 0.8581
+
+Precision Score: 0.9931729400167938
+Recall Score: 0.7553519366930446
+F1 Score: 0.8580891398290382
+
